@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+
+  app:
+    image: rust:1.47-alpine3.12
+    restart: unless-stopped
+    user: 1000:1000
+    working_dir: /usr/src/app
+    volumes:
+      - "./app/:/usr/src/app"
+    command: tail -F .gitignore
+
