@@ -5,3 +5,4 @@ authors = ["thled <dev@tleduc.de>"]
 edition = "2018"
 
 [dependencies]
+text_io = "0.1.8"
