@@ -13,10 +13,7 @@ fn get_nth_input() -> u32 {
     io::stdin()
         .read_line(&mut nth)
         .expect("Failed to read line");
-    match nth.trim().parse() {
-        Ok(num) => num,
-        Err(_) => 0,
-    }
+    nth.trim().parse().expect("Not a natural number!")
 }
 
 fn generate_nth_fibonacci(nth: u32) -> u32 {
