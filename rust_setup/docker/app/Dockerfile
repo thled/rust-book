@@ -5,5 +5,7 @@ ENV USER=rust
 RUN adduser -D rust
 USER rust
 
+RUN rustup component add rustfmt
+
 WORKDIR /usr/src/app
 
