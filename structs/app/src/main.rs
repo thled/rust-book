@@ -22,6 +22,24 @@ fn main() {
         user2.count,
         user2.active,
     );
+
+    let user3 = User {
+        mail: String::from("copy@example.com"),
+        name: String::from("she"),
+        ..user1
+    };
+    println!(
+        "My name is '{}' with an mail of '{}' logged in {} times and am active {}.",
+        user3.name,
+        user3.mail,
+        user3.count,
+        user3.active,
+    );
+
+    let black = Color(0, 0, 0);
+    println!("The color black as tuple struct: {}, {}, {}", black.0, black.1, black.2);
+    let origin = Point(0, 0, 0);
+    println!("The origin point as tuple struct: {}/{}/{}", origin.0, origin.1, origin.2);
 }
 
 struct User {
@@ -39,3 +57,6 @@ fn build_user(mail: String, name: String) -> User {
         count: 1,
     }
 }
+
+struct Color(i32, i32, i32);
+struct Point(i32, i32, i32);
