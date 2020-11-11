@@ -9,11 +9,15 @@ fn main() {
         let first_char = chars.nth(0).unwrap();
         if VOWELS.contains(&first_char) {
             pig_latin.push_str(word);
+            pig_latin.push_str("-h");
         } else {
             for rest in chars {
                 pig_latin.push(rest);
             }
+            pig_latin.push('-');
+            pig_latin.push(first_char);
         }
+        pig_latin.push_str("ay");
 
         pig_latin.push(' ');
     }
