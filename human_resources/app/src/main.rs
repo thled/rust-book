@@ -1,37 +1,53 @@
-use std::collections::HashMap;
+use std::{collections::HashMap, io};
 
 fn main() {
     let mut company = HashMap::new();
 
-    let employee = "Sally";
+    let employee = "John";
     let department = "Engineering";
     company
         .entry(&department)
         .or_insert_with(Vec::new)
         .push(employee);
 
-    let employee2 = "Amir";
-    let department2 = "Sales";
-    company
-        .entry(&department2)
-        .or_insert_with(Vec::new)
-        .push(employee2);
+    loop {
+        println!("To add an employee: Add EMPLOYEE to DEPARTMENT");
+        println!("To list employees of department: List DEPARTMENT");
+        println!("To list all employees: All");
 
-    let employee2 = "John";
-    let department2 = "Sales";
-    company
-        .entry(&department2)
-        .or_insert_with(Vec::new)
-        .push(employee2);
+        let mut input = String::new();
+        io::stdin()
+            .read_line(&mut input)
+            .expect("Failed to read line");
+        let input = input.trim();
 
-    println!("{:#?}", company);
+        let mut words = input.split_whitespace();
+        match words.next() {
+            Some(word) => match word {
+                "All" => {
+                    for (_department, employees) in &mut company {
+                        employees.sort();
+                    }
+                    println!("{:#?}", company);
+                }
+                "List" => {
+                    let department_lookup = match words.next() {
+                        Some(department) => department,
+                        None => "Engineering",
+                    };
+                    match company.get(&department_lookup) {
+                        Some(employees) => println!(
+                            "Employees of Department '{}': {:?}",
+                            department_lookup, employees,
+                        ),
+                        None => println!("Department '{}' does not exist.", department_lookup),
+                    }
+                }
+                _ => println!("Please use a pattern from above."),
+            },
+            None => println!("No words detected!"),
+        }
 
-    let department_lookup = "Sales";
-    match company.get(&department_lookup) {
-        Some(employees) => println!(
-            "Employees of Department '{}': {:?}",
-            department_lookup, employees,
-        ),
-        None => println!("Department '{}' does not exist.", department_lookup),
+        println!("");
     }
 }
