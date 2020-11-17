@@ -6,7 +6,7 @@ fn main() {
     let employee = "John";
     let department = "Engineering";
     company
-        .entry(&department)
+        .entry(department)
         .or_insert_with(Vec::new)
         .push(employee);
 
@@ -26,7 +26,7 @@ fn main() {
             Some(word) => match word {
                 "All" => {
                     for (_department, employees) in &mut company {
-                        employees.sort();
+                        employees.sort_unstable();
                     }
                     println!("{:#?}", company);
                 }
@@ -42,6 +42,19 @@ fn main() {
                         ),
                         None => println!("Department '{}' does not exist.", department_lookup),
                     }
+                }
+                "Add" => {
+                    let employee = words.next().unwrap();
+                    words.next();
+                    let department = words.next().unwrap();
+
+                    // todo: not working
+                    // company
+                    //     .entry(department)
+                    //     .or_insert_with(Vec::new)
+                    //     .push(employee);
+
+                    println!("{} added to {}", employee, department);
                 }
                 _ => println!("Please use a pattern from above."),
             },
