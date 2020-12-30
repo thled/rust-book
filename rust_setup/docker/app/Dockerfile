@@ -1,4 +1,4 @@
-FROM rust:1.47-alpine3.12
+FROM rust:1.48-alpine3.12
 
 ENV USER=rust
 
